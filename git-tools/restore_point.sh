@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Define o diretório do projeto
+PROJECT_DIR=$(dirname $(dirname $(readlink -f $0)))
+
 # Função para exibir mensagens de status
 print_status() {
     echo "----------------------------------------"
@@ -22,26 +25,26 @@ restore_to_commit() {
     pkill -f "uvicorn main:app"
     
     # 2. Backup do .env atual
-    if [ -f ../.env ]; then
+    if [ -f $PROJECT_DIR/.env ]; then
         print_status "Fazendo backup do .env..."
-        cp ../.env ../.env.backup
+        cp $PROJECT_DIR/.env $PROJECT_DIR/.env.backup
     fi
     
     # 3. Reverter código para o commit específico
     print_status "Revertendo código..."
-    git -C .. reset --hard $HASH
+    git -C $PROJECT_DIR reset --hard $HASH
     
     # 4. Backup do banco de dados atual
-    if [ -d ../database ]; then
+    if [ -d $PROJECT_DIR/database ]; then
         print_status "Fazendo backup do banco de dados..."
         timestamp=$(date +%Y%m%d_%H%M%S)
-        mkdir -p ../database_backups
-        cp -r ../database ../database_backups/database_$timestamp
+        mkdir -p $PROJECT_DIR/database_backups
+        cp -r $PROJECT_DIR/database $PROJECT_DIR/database_backups/database_$timestamp
     fi
     
     # 5. Recriar ambiente virtual com as dependências corretas
     print_status "Recriando ambiente virtual..."
-    cd ..
+    cd $PROJECT_DIR
     rm -rf venv
     python3 -m venv venv
     source venv/bin/activate
@@ -49,8 +52,8 @@ restore_to_commit() {
     
     # 6. Limpar cache e arquivos temporários
     print_status "Limpando cache..."
-    find . -type d -name "__pycache__" -exec rm -r {} +
-    rm -rf .pytest_cache
+    find $PROJECT_DIR -type d -name "__pycache__" -exec rm -r {} +
+    rm -rf $PROJECT_DIR/.pytest_cache
     
     # 7. Reiniciar serviços
     print_status "Reiniciando serviços..."
