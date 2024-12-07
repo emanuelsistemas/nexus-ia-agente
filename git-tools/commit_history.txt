@@ -1,1 +1,3 @@
+[07/12/2024 12:55:35] Commit: a5254ab - Para restaurar use: git reset --hard a5254ab
 [07/12/2024 12:38:28] Commit: fb25aee - Para restaurar use: git reset --hard fb25aee
+[07/12/2024 12:44:53] Commit: 62475b9 - Para restaurar use: git reset --hard 62475b9

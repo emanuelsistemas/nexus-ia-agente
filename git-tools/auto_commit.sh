@@ -12,13 +12,25 @@ git commit -m "Commit automático - $DATA_HORA" --no-verify
 # Obtém o hash do commit que acabamos de criar
 HASH=$(git rev-parse --short HEAD)
 
-# Adiciona o registro no arquivo de histórico
-echo "[$DATA_HORA] Commit: $HASH - Para restaurar use: git reset --hard $HASH" >> ./commit_history.txt
+# Adiciona o registro no início do arquivo de histórico
+TEMP_FILE=$(mktemp)
+echo "[$DATA_HORA] Commit: $HASH - Para restaurar use: git reset --hard $HASH" > "$TEMP_FILE"
+if [ -f ./commit_history.txt ]; then
+    cat ./commit_history.txt >> "$TEMP_FILE"
+fi
+mv "$TEMP_FILE" ./commit_history.txt
+
+# Adiciona o arquivo de histórico ao commit se foi modificado
+git add ./commit_history.txt
+git commit --amend -m "Commit automático - $DATA_HORA" --no-verify
 
 # Faz o push
-git push origin HEAD
+git push origin HEAD --force
 
 # Exibe a mensagem de confirmação
 echo "Commit realizado com sucesso!"
 echo "Hash para restauração: $HASH"
-echo "Este hash foi salvo em ./commit_history.txt"
+echo "Histórico completo salvo em ./commit_history.txt"
+echo "----------------------------------------"
+echo "Últimos 5 commits do histórico:"
+head -n 5 ./commit_history.txt
