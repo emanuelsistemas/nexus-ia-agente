@@ -9,6 +9,9 @@ cd $PROJECT_DIR || {
     exit 1
 }
 
+# Configura o timezone para São Paulo
+export TZ="America/Sao_Paulo"
+
 # Obtém a data e hora atual no formato brasileiro
 DATA_HORA=$(date '+%d/%m/%Y %H:%M:%S')
 

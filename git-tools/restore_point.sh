@@ -18,7 +18,10 @@ restore_to_commit() {
     fi
     
     HASH=$1
+    export TZ="America/Sao_Paulo"
+    DATA_HORA=$(date '+%Y%m%d_%H%M%S')
     print_status "Iniciando restauração para o commit: $HASH"
+    print_status "Data/Hora: $(date '+%d/%m/%Y %H:%M:%S')"
     
     # 1. Parar serviços em execução
     print_status "Parando serviços..."
@@ -27,7 +30,7 @@ restore_to_commit() {
     # 2. Backup do .env atual
     if [ -f $PROJECT_DIR/.env ]; then
         print_status "Fazendo backup do .env..."
-        cp $PROJECT_DIR/.env $PROJECT_DIR/.env.backup
+        cp $PROJECT_DIR/.env $PROJECT_DIR/.env.backup_$DATA_HORA
     fi
     
     # 3. Reverter código para o commit específico
@@ -37,9 +40,8 @@ restore_to_commit() {
     # 4. Backup do banco de dados atual
     if [ -d $PROJECT_DIR/database ]; then
         print_status "Fazendo backup do banco de dados..."
-        timestamp=$(date +%Y%m%d_%H%M%S)
         mkdir -p $PROJECT_DIR/database_backups
-        cp -r $PROJECT_DIR/database $PROJECT_DIR/database_backups/database_$timestamp
+        tar -czf $PROJECT_DIR/database_backups/db_backup_$DATA_HORA.tar.gz $PROJECT_DIR/database/
     fi
     
     # 5. Recriar ambiente virtual com as dependências corretas
@@ -62,8 +64,8 @@ restore_to_commit() {
     print_status "Restauração completa!"
     echo "Serviços reiniciados na porta 8000"
     echo "Logs disponíveis em: server.log"
-    echo "Backup do .env salvo em: .env.backup"
-    echo "Backup do banco de dados salvo em: database_backups/database_$timestamp"
+    echo "Backup do .env salvo em: .env.backup_$DATA_HORA"
+    echo "Backup do banco de dados salvo em: database_backups/db_backup_$DATA_HORA.tar.gz"
 }
 
 # Se o script for chamado diretamente
