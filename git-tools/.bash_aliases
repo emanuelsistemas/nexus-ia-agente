@@ -7,8 +7,8 @@ source /root/project/nexus/nexus-ia/v1/git-tools/git_commands.sh
 # Restauração completa para um commit específico
 alias restore='/root/project/nexus/nexus-ia/v1/git-tools/restore_point.sh'
 
-# Interface gráfica do Git
-alias ggui='python3 /root/project/nexus/nexus-ia/v1/git-tools/git_gui.py'
+# Interface do Git (versão terminal)
+alias ggui='python3 /root/project/nexus/nexus-ia/v1/git-tools/git_tui.py'
 
 # Git status
 alias gs='git_status'
