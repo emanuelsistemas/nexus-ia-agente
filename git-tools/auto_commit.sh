@@ -6,14 +6,11 @@ DATA_HORA=$(date '+%d/%m/%Y %H:%M:%S')
 # Adiciona todas as alterações
 git add .
 
-# Faz o commit
-git commit -m "Commit automático - $DATA_HORA"
+# Gera um hash único para o commit (baseado no timestamp e conteúdo)
+TEMP_HASH=$(echo "$DATA_HORA $(git write-tree)" | git hash-object --stdin)
 
-# Obtém o hash do último commit
-HASH=$(git rev-parse HEAD)
-
-# Atualiza a mensagem do commit com o hash
-git commit --amend -m "Commit automático - $DATA_HORA - Hash: $HASH"
+# Faz o commit com o hash já incluído
+git commit -m "Commit automático - $DATA_HORA - Hash: $TEMP_HASH"
 
 # Faz o push
-git push origin HEAD --force
+git push origin HEAD
