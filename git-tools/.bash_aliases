@@ -4,6 +4,9 @@ alias ac='/root/project/nexus/nexus-ia/v1/git-tools/auto_commit.sh'
 # Carrega as funções do script git_commands.sh
 source /root/project/nexus/nexus-ia/v1/git-tools/git_commands.sh
 
+# Restauração completa para um commit específico
+alias restore='/root/project/nexus/nexus-ia/v1/git-tools/restore_point.sh'
+
 # Git status
 alias gs='git status'
 
