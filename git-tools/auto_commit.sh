@@ -12,11 +12,8 @@ git commit -m "Commit automático - $DATA_HORA" --no-verify
 # Obtém o hash do commit que acabamos de criar
 HASH=$(git rev-parse --short HEAD)
 
-# Cria o diretório de logs se não existir
-mkdir -p ./logs
-
-# Adiciona o registro no arquivo de log dentro da pasta git-tools
-echo "[$DATA_HORA] Commit: $HASH - Para restaurar use: git reset --hard $HASH" >> ./logs/commit_history.log
+# Adiciona o registro no arquivo de histórico
+echo "[$DATA_HORA] Commit: $HASH - Para restaurar use: git reset --hard $HASH" >> ./commit_history.txt
 
 # Faz o push
 git push origin HEAD
@@ -24,4 +21,4 @@ git push origin HEAD
 # Exibe a mensagem de confirmação
 echo "Commit realizado com sucesso!"
 echo "Hash para restauração: $HASH"
-echo "Este hash foi salvo em ./logs/commit_history.log"
+echo "Este hash foi salvo em ./commit_history.txt"
