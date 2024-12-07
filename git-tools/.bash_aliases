@@ -8,22 +8,22 @@ source /root/project/nexus/nexus-ia/v1/git-tools/git_commands.sh
 alias restore='/root/project/nexus/nexus-ia/v1/git-tools/restore_point.sh'
 
 # Git status
-alias gs='git status'
+alias gs='git_status'
 
 # Git log formatado
-alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gl='git_log'
 
 # Git branch
-alias gb='git branch'
+alias gb='git_branch'
 
 # Git checkout com parâmetro
-alias gch='git checkout'
+alias gch='git_checkout'
 
 # Criar e mudar para nova branch
-alias gcb='git checkout -b'
+alias gcb='git_checkout_new'
 
 # Git diff
-alias gd='git diff'
+alias gd='git_diff'
 
 # Reverter para commit específico
 alias grh='revert_to_commit'
@@ -32,7 +32,7 @@ alias grh='revert_to_commit'
 alias grs='soft_reset_to_commit'
 
 # Reverter último commit
-alias grh-last='git reset --hard HEAD~1'
+alias grh-last='revert_last_commit'
 
 # Limpar arquivos não rastreados
 alias gclean='clean_untracked'
