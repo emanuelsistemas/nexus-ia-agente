@@ -1,8 +1,8 @@
 # Aliases para comandos Git
-alias ac='/root/project/nexus/nexus-ia/v1/git_automation/auto_commit.sh'
+alias ac='/root/project/nexus/nexus-ia/v1/git-tools/auto_commit.sh'
 
 # Carrega as funções do script git_commands.sh
-source /root/project/nexus/nexus-ia/v1/git_automation/git_commands.sh
+source /root/project/nexus/nexus-ia/v1/git-tools/git_commands.sh
 
 # Git status
 alias gs='git status'
