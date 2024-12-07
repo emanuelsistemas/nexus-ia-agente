@@ -1,3 +1,4 @@
+[07/12/2024 10:46:13] Commit: af802e7 - Para restaurar use: git reset --hard af802e7
 [07/12/2024 10:31:26] Commit: 89a21b0 - Para restaurar use: git reset --hard 89a21b0
 [07/12/2024 10:30:53] Commit: e8c940d - Para restaurar use: git reset --hard e8c940d
 [07/12/2024 10:17:04] Commit: 3d50b91 - Para restaurar use: git reset --hard 3d50b91
